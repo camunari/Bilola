@@ -1,0 +1,24 @@
+from PIL import Image, ImageFont, ImageDraw
+
+import csv
+
+
+with open("teste.csv", "r") as arquivo:
+  arquivo_csv = csv.reader(arquivo, delimiter=',')
+  for linha in arquivo_csv:
+    
+    nome_pessoa = linha[0]
+    cpf_pessoa  = linha[1]
+
+    coord_beneficiario = (44, 225)
+    coord_cpf= (44, 271)
+
+    im = Image.open(r'teste.jpeg')
+    caminho_fonte = r"C:Windows\Fonts\ARIALN.TTF"
+    font = ImageFont.truetype(caminho_fonte, 22)
+    fontcpf = ImageFont.truetype(caminho_fonte, 18)
+    rgb = (255,255,255)
+    desenho = ImageDraw.Draw(im)
+    desenho.text(coord_beneficiario, nome_pessoa, font=font, fill=rgb)
+    desenho.text(coord_cpf, cpf_pessoa, font=fontcpf, fill=rgb)
+    im.save(f'{nome_pessoa}.png')
